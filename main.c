@@ -1,5 +1,5 @@
-#include "../keyboard/keyboard.h"
 #include "TermVision.h"
+#include "keyboard/keyboard.h"
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -9,22 +9,27 @@ int	main(int argc, char const *argv[])
 	t_window	window;
 	t_keyboard	*keyboard;
 	char		k_buf;
+	size_t		process_life;
+	pid_t		pid;
 
-	printf("pid: %d\n", getpid());
+	pid = getpid();
+	process_life = 100;
+	keyboard = keyboard_init('q', &k_buf);
 	window = new_window();
 	if (!window)
 		return (1);
-	keyboard = keyboard_init('q');
-	start_keylistener(keyboard, &k_buf);
-	while (k_buf != 'q')
+	start_keylistener(keyboard);
+	render(window);
+	while (process_life--)
 	{
-		sleep(1);
-		if (k_buf == 'r')
-		{
-			window->needs_render = true;
-			render(window);
-		}
+		usleep(100000);
+		fill_window(window, k_buf);
+		render(window);
+		if (k_buf == 'q')
+			break ;
 	}
+	keyboard_bruteforce_exit(keyboard);
+	keyboard_free(keyboard);
 	del_window(window);
 	return (0);
 }
