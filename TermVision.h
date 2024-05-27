@@ -4,8 +4,8 @@
 # include <stdbool.h>
 # include <stddef.h>
 
-# define WINDOW_WIDTH 60
-# define WINDOW_HEIGHT 24
+# define WINDOW_WIDTH 40
+# define WINDOW_HEIGHT 16
 
 typedef struct s_window
 {

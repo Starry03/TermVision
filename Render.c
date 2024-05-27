@@ -11,13 +11,6 @@ void	render(t_window window)
 		return ;
 	write(STDOUT_FILENO, CLEAR, CLEAR_LENGTH);
 	for (size_t i = 0; i < window->h; i++)
-	{
-		if (!window->table[i])
-		{
-			write(STDERR_FILENO, "Null line", 9);
-			continue ;
-		}
 		write(STDOUT_FILENO, window->table[i], strlen(window->table[i]));
-	}
 	window->needs_render = false;
 }
