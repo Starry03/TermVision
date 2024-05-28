@@ -18,5 +18,5 @@ void	fill_window(t_window window, char c)
 		}
 		i++;
 	}
-	window->needs_render = true;
+	set_render(window, true);
 }

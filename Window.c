@@ -3,28 +3,24 @@
 #include <stdlib.h>
 #include <string.h>
 
-t_window	new_window(void)
+t_window	new_window(size_t w, size_t h)
 {
 	t_window	window;
 
 	window = (t_window)malloc(sizeof(s_window));
 	if (!window)
 		return (NULL);
-	window->w = WINDOW_WIDTH;
-	window->h = WINDOW_HEIGHT;
-	window->table = (char **)malloc(sizeof(char *) * WINDOW_HEIGHT);
+	window->w = (w > 0 ? w : WINDOW_WIDTH);
+	window->h = (h > 0 ? h : WINDOW_HEIGHT);
+	window->table = (char **)malloc(sizeof(char *) * window->h);
 	window->needs_render = true;
 	if (!window->table)
 	{
 		free(window);
 		return (NULL);
 	}
-	for (size_t i = 0; i < WINDOW_HEIGHT; i++)
-	{
-		window->table[i] = (char *)calloc(WINDOW_WIDTH, sizeof(char));
-		memset(window->table[i], 'b', WINDOW_WIDTH - 1);
-		window->table[i][WINDOW_WIDTH - 1] = '\n';
-	}
+	for (size_t i = 0; i < window->h; i++)
+		window->table[i] = (char *)calloc(window->w, sizeof(char));
 	return (window);
 }
 void	del_window(t_window window)
