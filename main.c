@@ -15,7 +15,7 @@ int	main(int argc, char const *argv[])
 	pid = getpid();
 	process_life = 100;
 	keyboard = keyboard_init('q', &k_buf);
-	window = new_window(40, 10);
+	window = new_window(40, 35);
 	if (!window)
 		return (1);
 	start_keylistener(keyboard);

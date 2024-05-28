@@ -4,7 +4,7 @@ UniC = -I./UniC ./UniC/UniC.a
 all:
 	@cd ./UniC && make
 	@cd ./keyboard && make
-	@gcc *.c -o TermVision2 $(KEYBOARD)
+	gcc *.c -o TermVision2 $(KEYBOARD)
 	@echo "Compiled"
 
 valgrind:

@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define CLEAR "\x1b[2J"
+#define CLEAR "\e[1;1H\e[2J"
 #define DISABLE_WRAPPING "\033[?7l"
 #define ENABLE_WRAPPING "\033[?7h"
 
@@ -42,8 +42,8 @@ void	render(t_window window)
 		return ;
 	if (!check_buf_integrity(window))
 		return ;
-	// write(STDOUT_FILENO, CLEAR, strlen(CLEAR));
-	system("clear");
+	write(STDOUT_FILENO, CLEAR, strlen(CLEAR));
+	// system("clear");
 	for (size_t i = 0; i < window->h; i++)
 		write(STDOUT_FILENO, window->buf[i], strlen(window->buf[i]));
 	set_render(window, false);
