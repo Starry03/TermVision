@@ -19,6 +19,8 @@ int	main(int argc, char const *argv[])
 	if (!window)
 		return (1);
 	start_keylistener(keyboard);
+	change_color(window, RED);
+	change_bg(window, BG_GREEN);
 	fill_window(window, 'b');
 	force_newlines(window);
 	render(window);

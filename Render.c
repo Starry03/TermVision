@@ -1,7 +1,8 @@
 #include "TermVision.h"
+#include "colors.h"
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 #define CLEAR "\e[1;1H\e[2J"
 #define DISABLE_WRAPPING "\033[?7l"
@@ -22,29 +23,29 @@ void	set_render(t_window window, bool value)
 	window->needs_render = value;
 }
 
-static bool check_buf_integrity(t_window window)
-{
-	size_t line;
-
-	line = 0;
-	while (line < window->h)
-	{
-		if (window->buf[line][window->w - 1])
-			return (false);
-		line++;
-	}
-	return (true);
-}
-
 void	render(t_window window)
 {
-	if (!window || !window->needs_render)
+	t_colored_char	**buf;
+
+	if (!window || !window->needs_render || !window->buf)
 		return ;
-	if (!check_buf_integrity(window))
-		return ;
+	buf = window->buf;
 	write(STDOUT_FILENO, CLEAR, strlen(CLEAR));
-	// system("clear");
 	for (size_t i = 0; i < window->h; i++)
-		write(STDOUT_FILENO, window->buf[i], strlen(window->buf[i]));
+	{
+		for (size_t j = 0; j < window->w; j++)
+		{
+			if (buf[i][j]->bg)
+				write(STDOUT_FILENO, buf[i][j]->bg, strlen(buf[i][j]->bg));
+			if (buf[i][j]->fg)
+			{
+				write(STDOUT_FILENO, buf[i][j]->fg, strlen(buf[i][j]->fg));
+				write(STDOUT_FILENO, &(buf[i][j]->c), 1);
+				write(STDOUT_FILENO, RESET, strlen(RESET));
+				continue ;
+			}
+			write(STDOUT_FILENO, &buf[i][j]->c, 1);
+		}
+	}
 	set_render(window, false);
 }
