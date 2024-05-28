@@ -9,7 +9,7 @@
 
 typedef struct s_window
 {
-	char				**table;
+	char				**buf;
 	size_t				w;
 	size_t				h;
 	bool				needs_render;
@@ -22,8 +22,10 @@ void					del_window(t_window window);
 
 /* update */
 void					fill_window(t_window window, char c);
+void					force_newlines(t_window window);
 
 /* render */
+bool					ask_render(t_window window);
 void					set_render(t_window window, bool value);
 void					render(t_window window);
 

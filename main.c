@@ -15,19 +15,13 @@ int	main(int argc, char const *argv[])
 	pid = getpid();
 	process_life = 100;
 	keyboard = keyboard_init('q', &k_buf);
-	window = new_window();
+	window = new_window(40, 10);
 	if (!window)
 		return (1);
 	start_keylistener(keyboard);
+	fill_window(window, 'b');
+	force_newlines(window);
 	render(window);
-	while (process_life--)
-	{
-		usleep(100000);
-		fill_window(window, k_buf);
-		render(window);
-		if (k_buf == 'q')
-			break ;
-	}
 	keyboard_bruteforce_exit(keyboard);
 	keyboard_free(keyboard);
 	del_window(window);
