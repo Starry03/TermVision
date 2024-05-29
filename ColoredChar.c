@@ -19,6 +19,8 @@ t_colored_char	new_colored_char(t_uchar c, t_color fg, t_color bg)
 
 void	del_colored_char(t_colored_char colored_char)
 {
+	if (!colored_char)
+		return ;
 	free(colored_char);
 }
 

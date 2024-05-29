@@ -12,9 +12,9 @@ typedef unsigned char	t_uchar;
 
 typedef struct s_colored_char
 {
-	t_uchar				c;
 	t_color				fg;
 	t_color				bg;
+	t_uchar				c;
 }						t_colored_char_;
 
 typedef t_colored_char_	*t_colored_char;
