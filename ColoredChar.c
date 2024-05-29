@@ -1,5 +1,4 @@
 #include "TermVision.h"
-#include "UniC/libft/libft.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
