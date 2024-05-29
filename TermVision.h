@@ -45,6 +45,11 @@ void					change_color(t_window window, t_color fg);
 void					change_bg(t_window window, t_color bg);
 void					fill_window(t_window window, char c);
 void					force_newlines(t_window window);
+void					set_line(t_window window, char *line, size_t y);
+void					set_word_fg(t_window window, t_color fg, size_t x0,
+							size_t xf, size_t y0);
+void					set_word_bg(t_window window, t_color bg, size_t x0,
+							size_t xf, size_t y0);
 
 /* render */
 bool					ask_render(t_window window);

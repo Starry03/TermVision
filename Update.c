@@ -1,10 +1,9 @@
 #include "TermVision.h"
-
 #include <stdio.h>
 
 /**
  * @brief Change the background color of the window
-*/
+ */
 void	change_bg(t_window window, t_color bg)
 {
 	size_t	i;
@@ -28,7 +27,7 @@ void	change_bg(t_window window, t_color bg)
 
 /**
  * @brief Change the foreground color of the window
-*/
+ */
 void	change_color(t_window window, t_color fg)
 {
 	size_t	i;
@@ -52,7 +51,7 @@ void	change_color(t_window window, t_color fg)
 
 /**
  * @brief Fill the window with a character
-*/
+ */
 void	fill_window(t_window window, char c)
 {
 	size_t	i;
@@ -70,13 +69,13 @@ void	fill_window(t_window window, char c)
 			j++;
 		}
 		i++;
-	}	
+	}
 	ask_render(window);
 }
 
 /**
  * @brief adds '\n' at the end of each line
-*/
+ */
 void	force_newlines(t_window window)
 {
 	size_t	i;
@@ -90,4 +89,47 @@ void	force_newlines(t_window window)
 		i++;
 	}
 	ask_render(window);
+}
+
+void	set_line(t_window window, char *line, size_t y)
+{
+	size_t	i;
+
+	if (!window || !line)
+		return ;
+	i = 0;
+	while (i < window->w)
+	{
+		set_c(window->buf[y][i], line[i]);
+		i++;
+	}
+	ask_render(window);
+}
+
+static void	set_word(t_window window, void (*func)(t_colored_char, t_color),
+		t_color color, size_t x0, size_t xf, size_t y)
+{
+	size_t	i;
+
+	if (!window)
+		return ;
+	i = x0;
+	while (i <= xf)
+	{
+		func(window->buf[y][i], color);
+		i++;
+	}
+	ask_render(window);
+}
+
+void	set_word_fg(t_window window, t_color fg, size_t x0, size_t xf,
+		size_t y0)
+{
+	set_word(window, set_fg, fg, x0, xf, y0);
+}
+
+void	set_word_bg(t_window window, t_color bg, size_t x0, size_t xf,
+		size_t y0)
+{
+	set_word(window, set_bg, bg, x0, xf, y0);
 }
