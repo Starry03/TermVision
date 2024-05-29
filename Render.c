@@ -35,7 +35,7 @@ void	set_render(t_window window, bool value)
 /**
  * @brief renders the buffer to the window
  */
-void	render(t_window window)
+void	render(t_window window, size_t y_limit)
 {
 	t_colored_char	**buf;
 	t_colored_char	c_char;
@@ -54,7 +54,7 @@ void	render(t_window window)
 		return ;
 	i = 0;
 	w = window->w;
-	h = window->h;
+	h = (y_limit < window->h) ? y_limit : window->h;
 	output = calloc(8, sizeof(char));
 	output_len = 0;
 	while (i < h)

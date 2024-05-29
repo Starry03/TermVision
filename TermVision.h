@@ -55,6 +55,6 @@ void					set_word_bg(t_window window, t_color bg, size_t x0,
 /* render */
 bool					ask_render(t_window window);
 void					set_render(t_window window, bool value);
-void					render(t_window window);
+void					render(t_window window, size_t y_limit);
 
 #endif
