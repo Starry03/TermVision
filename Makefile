@@ -3,7 +3,8 @@ FLAGS = -Wall -Wextra -Werror
 CFILES = ColoredChar.c \
 	Render.c \
 	Update.c \
-	Window.c
+	Window.c \
+	colors.c
 OFILES = $(CFILES:.c=.o)
 
 NAME = termvision.a
