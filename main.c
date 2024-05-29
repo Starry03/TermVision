@@ -14,16 +14,24 @@ int	main(int argc, char const *argv[])
 
 	pid = getpid();
 	process_life = 100;
-	keyboard = keyboard_init('q', &k_buf);
+	keyboard = keyboard_init('/', &k_buf);
 	window = new_window(40, 35);
 	if (!window)
 		return (1);
 	start_keylistener(keyboard);
-	change_color(window, RED);
-	change_bg(window, BG_GREEN);
-	fill_window(window, 'b');
-	force_newlines(window);
-	render(window);
+	change_bg(window, BG_BLACK);
+	change_color(window, CYAN);
+	while (process_life--)
+	{
+		if (k_buf)
+		{
+			fill_window(window, k_buf);
+			force_newlines(window);
+			render(window);
+			k_buf = 0;
+		}
+		usleep(100000);
+	}
 	keyboard_bruteforce_exit(keyboard);
 	keyboard_free(keyboard);
 	del_window(window);

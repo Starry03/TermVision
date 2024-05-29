@@ -1,5 +1,7 @@
 #include "TermVision.h"
 
+#include <stdio.h>
+
 void	change_bg(t_window window, t_color bg)
 {
 	size_t	i;
@@ -13,7 +15,7 @@ void	change_bg(t_window window, t_color bg)
 		j = 0;
 		while (j < window->w)
 		{
-			window->buf[i][j]->bg = bg;
+			set_bg(window->buf[i][j], bg);
 			j++;
 		}
 		i++;
@@ -34,7 +36,7 @@ void	change_color(t_window window, t_color fg)
 		j = 0;
 		while (j < window->w)
 		{
-			window->buf[i][j]->fg = fg;
+			set_fg(window->buf[i][j], fg);
 			j++;
 		}
 		i++;
@@ -55,11 +57,11 @@ void	fill_window(t_window window, char c)
 		j = 0;
 		while (j < window->w - 1)
 		{
-			window->buf[i][j]->c = c;
+			set_c(window->buf[i][j], c);
 			j++;
 		}
 		i++;
-	}
+	}	
 	ask_render(window);
 }
 
@@ -72,7 +74,7 @@ void	force_newlines(t_window window)
 	i = 0;
 	while (i < window->h)
 	{
-		window->buf[i][window->w - 2]->c = '\n';
+		set_c(window->buf[i][window->w - 1], '\n');
 		i++;
 	}
 	ask_render(window);

@@ -8,9 +8,11 @@
 # define WINDOW_WIDTH 96
 # define WINDOW_HEIGHT 16
 
+typedef unsigned char	t_uchar;
+
 typedef struct s_colored_char
 {
-	char				c;
+	t_uchar				c;
 	t_color				fg;
 	t_color				bg;
 }						t_colored_char_;
@@ -28,8 +30,11 @@ typedef struct s_window
 typedef struct s_window	*t_window;
 
 // colored char
-t_colored_char			new_colored_char(char c, t_color fg, t_color bg);
+t_colored_char			new_colored_char(t_uchar c, t_color fg, t_color bg);
 void					del_colored_char(t_colored_char colored_char);
+void					set_bg(t_colored_char c, t_color bg);
+void					set_fg(t_colored_char c, t_color fg);
+void					set_c(t_colored_char c, t_uchar new_c);
 
 // window
 t_window				new_window(size_t w, size_t h);
