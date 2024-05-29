@@ -114,7 +114,7 @@ static void	set_word(t_window window, void (*func)(t_colored_char, t_color),
 	if (!window)
 		return ;
 	i = x0;
-	while (i <= xf)
+	while (i < xf)
 	{
 		func(window->buf[y][i], color);
 		i++;

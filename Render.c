@@ -13,7 +13,7 @@
 /**
  * @brief tries to set the render flag to true
  * @return true if the render flag was set to true, false otherwise
-*/
+ */
 bool	ask_render(t_window window)
 {
 	if (!window)
@@ -24,7 +24,7 @@ bool	ask_render(t_window window)
 
 /**
  * @brief set the render flag to a value
-*/
+ */
 void	set_render(t_window window, bool value)
 {
 	if (!window)
@@ -34,7 +34,7 @@ void	set_render(t_window window, bool value)
 
 /**
  * @brief renders the buffer to the window
-*/
+ */
 void	render(t_window window)
 {
 	t_colored_char	**buf;
@@ -74,6 +74,8 @@ void	render(t_window window)
 		i++;
 	}
 	write(STDOUT_FILENO, CLEAR, strlen(CLEAR));
+	if (!output)
+		return ;
 	write(STDOUT_FILENO, output, output_len);
 	free(output);
 	set_render(window, false);

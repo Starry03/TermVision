@@ -29,7 +29,6 @@ t_color	get_ansi_color(uint16_t red, uint16_t green, uint16_t blue, bool is_fg)
 	if (red > 255 || green > 255 || blue > 255)
 		return (NULL);
 	color = (t_color)calloc(20, sizeof(char));
-	color[20] = 0;
 	strcpy(color, "\033[");
 	if (is_fg)
 		strcat(color, "38;2;");
