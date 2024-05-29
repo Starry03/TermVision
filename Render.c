@@ -63,8 +63,9 @@ void	render(t_window window)
 		while (j < w)
 		{
 			c_char = buf[i][j];
-			output_len += snprintf(NULL, 0, "%s%s%c%s", c_char->fg, c_char->bg,
-					c_char->c, RESET);
+			output_len += snprintf(NULL, 0, "%s%s%c%s",
+					(c_char->fg) ? c_char->fg : "",
+					(c_char->bg) ? c_char->bg : "", (c_char->c) ? c_char->c : ' ', RESET);
 			output = realloc(output, output_len + 1);
 			len_buf = strlen(output);
 			snprintf(output + len_buf, output_len + 1 - len_buf, "%s%s%c%s",
