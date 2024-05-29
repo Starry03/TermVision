@@ -44,8 +44,8 @@ void	render(t_window window, size_t y_limit)
 	size_t			w;
 	size_t			h;
 	size_t			len_buf;
-	char			*output;
 	size_t			output_len;
+	char			*output;
 
 	if (!window || !window->needs_render || !window->buf)
 		return ;
@@ -65,7 +65,8 @@ void	render(t_window window, size_t y_limit)
 			c_char = buf[i][j];
 			output_len += snprintf(NULL, 0, "%s%s%c%s",
 					(c_char->fg) ? c_char->fg : "",
-					(c_char->bg) ? c_char->bg : "", (c_char->c) ? c_char->c : ' ', RESET);
+					(c_char->bg) ? c_char->bg : "",
+					(c_char->c) ? c_char->c : ' ', RESET);
 			output = realloc(output, output_len + 1);
 			len_buf = strlen(output);
 			snprintf(output + len_buf, output_len + 1 - len_buf, "%s%s%c%s",
