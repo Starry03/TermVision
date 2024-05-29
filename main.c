@@ -20,7 +20,7 @@ int	main(int argc, char const *argv[])
 		return (1);
 	start_keylistener(keyboard);
 	change_bg(window, BG_BLACK);
-	change_color(window, CYAN);
+	change_color(window, RED);
 	while (process_life--)
 	{
 		if (k_buf)

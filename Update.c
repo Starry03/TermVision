@@ -2,6 +2,9 @@
 
 #include <stdio.h>
 
+/**
+ * @brief Change the background color of the window
+*/
 void	change_bg(t_window window, t_color bg)
 {
 	size_t	i;
@@ -23,6 +26,9 @@ void	change_bg(t_window window, t_color bg)
 	ask_render(window);
 }
 
+/**
+ * @brief Change the foreground color of the window
+*/
 void	change_color(t_window window, t_color fg)
 {
 	size_t	i;
@@ -44,6 +50,9 @@ void	change_color(t_window window, t_color fg)
 	ask_render(window);
 }
 
+/**
+ * @brief Fill the window with a character
+*/
 void	fill_window(t_window window, char c)
 {
 	size_t	i;
@@ -65,6 +74,9 @@ void	fill_window(t_window window, char c)
 	ask_render(window);
 }
 
+/**
+ * @brief adds '\n' at the end of each line
+*/
 void	force_newlines(t_window window)
 {
 	size_t	i;
