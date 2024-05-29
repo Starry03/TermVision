@@ -55,7 +55,7 @@ void	render(t_window window)
 	i = 0;
 	w = window->w;
 	h = window->h;
-	output = calloc(sizeof(char), 8);
+	output = calloc(8, sizeof(char));
 	output_len = 0;
 	while (i < h)
 	{

@@ -1,13 +1,28 @@
-KEYBOARD = -I./keyboard ./keyboard/keyboard.a
-UniC = -I./UniC ./UniC/UniC.a
+CC = gcc
+FLAGS = -Wall -Wextra -Werror
+CFILES = ColoredChar.c \
+	Render.c \
+	Update.c \
+	Window.c
+OFILES = $(CFILES:.c=.o)
 
-all:
-#	@cd ./UniC && make
-	@cd ./keyboard && make
-	gcc *.c -O3 -o TermVision2 $(KEYBOARD)
-	@echo "Compiled"
+NAME = termvision.a
 
-valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./TermVision2
+all: $(NAME)
 
-.PHONY: all valgrind
+$(NAME): $(OFILES)
+	ar rcs $@ $^
+	ranlib $(NAME)
+
+$(OFILES): %.o: %.c
+	$(CC) -c -I. $(FLAGS) -o $@ $< 
+
+clean:
+	rm -f $(OFILES)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
