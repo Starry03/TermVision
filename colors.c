@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char	*colorvalue_to_string(uint16_t value)
+static char	*colorvalue_to_string(uint16_t value)
 {
 	char	*buf;
 
