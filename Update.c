@@ -74,7 +74,7 @@ void	fill_window(t_window window, char c)
 }
 
 /**
- * @brief adds '\n' at the end of each line
+ * @brief adds new line at the end of each line
  */
 void	force_newlines(t_window window)
 {

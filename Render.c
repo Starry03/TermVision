@@ -32,6 +32,11 @@ void	set_render(t_window window, bool value)
 	window->needs_render = value;
 }
 
+static bool	char_is_valid(t_uchar c, bool is_ui)
+{
+	return (is_ui || (c != '\n' && c));
+}
+
 /**
  * @brief renders the buffer to the window
  */
@@ -57,6 +62,7 @@ void	render(t_window window, size_t y_limit)
 	h = (y_limit < window->h) ? y_limit : window->h;
 	output = calloc(8, sizeof(char));
 	output_len = 0;
+	force_newlines(window);
 	while (i < h)
 	{
 		j = 0;
@@ -68,7 +74,8 @@ void	render(t_window window, size_t y_limit)
 			output = realloc(output, output_len + 1);
 			len_buf = strlen(output);
 			snprintf(output + len_buf, output_len + 1 - len_buf, "%s%s%c%s",
-				c_char->fg, c_char->bg, c_char->c, RESET);
+				c_char->fg, c_char->bg,
+				char_is_valid(c_char->c, w - j < 2) ? c_char->c : ' ', RESET);
 			j++;
 		}
 		i++;
