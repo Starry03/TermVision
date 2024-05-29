@@ -91,14 +91,14 @@ void	force_newlines(t_window window)
 	ask_render(window);
 }
 
-void	set_line(t_window window, char *line, size_t y)
+void	set_line(t_window window, char *line, size_t x0, size_t y)
 {
 	size_t	i;
 
 	if (!window || !line)
 		return ;
-	i = 0;
-	while (i < window->w)
+	i = x0;
+	while (line[i] && i < window->w)
 	{
 		set_c(window->buf[y][i], line[i]);
 		i++;
