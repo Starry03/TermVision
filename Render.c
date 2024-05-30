@@ -32,9 +32,11 @@ void	set_render(t_window window, bool value)
 	window->needs_render = value;
 }
 
-static bool	char_is_valid(t_uchar c, bool is_ui)
+static char	conv_char(t_uchar c, bool is_ui)
 {
-	return (is_ui || (c != '\n' && c));
+	if (is_ui || (c != '\n' && c))
+		return (c);
+	return (' ');
 }
 
 /**
@@ -51,38 +53,40 @@ void	render(t_window window, size_t y_limit)
 	size_t			len_buf;
 	size_t			output_len;
 	char			*output;
+	char			super_buf[32];
 
 	if (!window || !window->needs_render || !window->buf)
 		return ;
 	buf = window->buf;
-	if (!buf)
-		return ;
 	i = 0;
 	w = window->w;
 	h = (y_limit < window->h) ? y_limit : window->h;
-	output = calloc(8, sizeof(char));
-	output_len = 0;
 	force_newlines(window);
-	while (i < h)
+	output_len = 0;
+	for (i = 0; i < h; i++)
 	{
-		j = 0;
-		while (j < w)
+		for (j = 0; j < w; j++)
 		{
 			c_char = buf[i][j];
 			output_len += snprintf(NULL, 0, "%s%s%c%s", c_char->fg, c_char->bg,
-					(c_char->c) ? c_char->c : ' ', RESET);
-			output = realloc(output, output_len + 1);
-			len_buf = strlen(output);
-			snprintf(output + len_buf, output_len + 1 - len_buf, "%s%s%c%s",
-				c_char->fg, c_char->bg,
-				char_is_valid(c_char->c, w - j < 2) ? c_char->c : ' ', RESET);
-			j++;
+					c_char->c, RESET);
 		}
-		i++;
 	}
-	write(STDOUT_FILENO, CLEAR, strlen(CLEAR));
+	output = calloc(output_len + 1, sizeof(char));
 	if (!output)
 		return ;
+	len_buf = 0;
+	for (i = 0; i < h; i++)
+	{
+		for (j = 0; j < w; j++)
+		{
+			c_char = buf[i][j];
+			len_buf += snprintf(output + len_buf, output_len + 1 - len_buf,
+					"%s%s%c%s", c_char->fg, c_char->bg, conv_char(c_char->c, w
+						- j == 1), RESET);
+		}
+	}
+	write(STDOUT_FILENO, CLEAR, strlen(CLEAR));
 	write(STDOUT_FILENO, output, output_len);
 	free(output);
 	set_render(window, false);
