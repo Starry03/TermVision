@@ -43,7 +43,7 @@ void					del_window(t_window window);
 /* update */
 void					change_color(t_window window, t_color fg);
 void					change_bg(t_window window, t_color bg);
-void					fill_window(t_window window, char c);
+void					fill_window(t_window window, char c, size_t y0);
 void					force_newlines(t_window window);
 void					set_line(t_window window, char *line, size_t x0,
 							size_t y);

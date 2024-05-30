@@ -52,14 +52,14 @@ void	change_color(t_window window, t_color fg)
 /**
  * @brief Fill the window with a character
  */
-void	fill_window(t_window window, char c)
+void	fill_window(t_window window, char c, size_t y0)
 {
 	size_t	i;
 	size_t	j;
 
 	if (!window)
 		return ;
-	i = 0;
+	i = y0;
 	while (i < window->h)
 	{
 		j = 0;
@@ -98,7 +98,7 @@ void	set_line(t_window window, char *line, size_t x0, size_t y)
 	if (!window || !line)
 		return ;
 	i = x0;
-	while (line[i] && i < window->w)
+	while (line[i-x0] && i < window->w)
 	{
 		set_c(window->buf[y][i], line[i-x0]);
 		i++;
