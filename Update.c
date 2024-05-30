@@ -100,7 +100,7 @@ void	set_line(t_window window, char *line, size_t x0, size_t y)
 	i = x0;
 	while (line[i] && i < window->w)
 	{
-		set_c(window->buf[y][i], line[i]);
+		set_c(window->buf[y][i], line[i-x0]);
 		i++;
 	}
 	ask_render(window);
