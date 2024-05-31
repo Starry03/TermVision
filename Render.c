@@ -53,7 +53,6 @@ void	render(t_window window, size_t y_limit)
 	size_t			len_buf;
 	size_t			output_len;
 	char			*output;
-	char			super_buf[32];
 
 	if (!window || !window->needs_render || !window->buf)
 		return ;
