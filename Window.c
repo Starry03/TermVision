@@ -1,7 +1,7 @@
 #include "TermVision.h"
 #include "colors.h"
-#include <stdlib.h>
 #include <assert.h>
+#include <stdlib.h>
 
 static t_colored_char	**allocate_buf(size_t w, size_t h)
 {
@@ -64,10 +64,10 @@ void	del_window(t_window window)
 
 void	update_buffer(t_window window)
 {
-	size_t i;
-	size_t j;
-	t_colored_char **prev_buf;
-	t_colored_char **buf;
+	size_t			i;
+	size_t			j;
+	t_colored_char	**prev_buf;
+	t_colored_char	**buf;
 
 	prev_buf = window->prev_buf;
 	buf = window->buf;
@@ -84,4 +84,11 @@ void	update_buffer(t_window window)
 		}
 		i++;
 	}
+}
+
+t_colored_char	**get_buf(t_window window)
+{
+	if (!window)
+		return (NULL);
+	return (window->buf);
 }

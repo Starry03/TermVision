@@ -41,6 +41,7 @@ void					set_c(t_colored_char c, t_uchar new_c);
 t_window				new_window(size_t w, size_t h);
 void					del_window(t_window window);
 void					update_buffer(t_window window);
+t_colored_char			**get_buf(t_window window);
 
 /* update */
 void					change_color(t_window window, t_color fg);
