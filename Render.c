@@ -11,8 +11,8 @@
 #define DISABLE_WRAPPING "\033[?7l"
 #define ENABLE_WRAPPING "\033[?7h"
 #define MOVE_CURSOR(x, y) printf("\x1b[%ld;%ldH", (y), (x))
-#define HIDE_CURSOR() write(1, "\x1b[?25l", 6)
-#define SHOW_CURSOR() write(1, "\x1b[?25h", 6)
+#define HIDE_CURSOR() printf("\x1b[?25l")
+#define SHOW_CURSOR() printf("\x1b[?25h")
 
 /**
  * @brief tries to set the render flag to true
