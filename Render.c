@@ -69,7 +69,7 @@ void	render(t_window window, size_t y_limit)
 			if (c_changed(buf[i][j], prev_buf[i][j]))
 			{
 				MOVE_CURSOR(j, i);
-				if (buf[i][j]->c == '\n' && w - j != 1)
+				if (!buf[i][j]->c || (buf[i][j]->c == '\n' && w - j != 1))
 					printf("%s%s%c%s", buf[i][j]->fg, buf[i][j]->bg, ' ',
 						RESET);
 				else
