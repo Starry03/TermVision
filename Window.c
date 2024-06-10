@@ -14,11 +14,11 @@ static t_colored_char	**allocate_buf(size_t w, size_t h)
 		buf[i] = (t_colored_char *)malloc(w * sizeof(t_colored_char));
 	for (size_t i = 0; i < h; i++)
 		for (size_t j = 0; j < w; j++)
-			buf[i][j] = new_colored_char(' ', NULL, NULL);
+			buf[i][j] = ColoredChar_Init(' ', NULL, NULL);
 	return (buf);
 }
 
-t_window	new_window(size_t w, size_t h)
+t_window	Window_Init(size_t w, size_t h)
 {
 	t_window	window;
 
@@ -32,7 +32,7 @@ t_window	new_window(size_t w, size_t h)
 	window->prev_buf = allocate_buf(window->w, window->h);
 	if (!window->buf || !window->prev_buf)
 	{
-		del_window(window);
+		Window_Free(window);
 		return (NULL);
 	}
 	return (window);
@@ -43,13 +43,13 @@ static void	dealloc_buf(t_colored_char **buf, size_t w, size_t h)
 	for (size_t i = 0; i < h; i++)
 	{
 		for (size_t j = 0; j < w; j++)
-			del_colored_char(buf[i][j]);
+			ColoredChar_Free(buf[i][j]);
 		free(buf[i]);
 	}
 	free(buf);
 }
 
-void	del_window(t_window window)
+void	Window_Free(t_window window)
 {
 	if (!window)
 		return ;
@@ -62,7 +62,7 @@ void	del_window(t_window window)
 	free(window);
 }
 
-void	update_buffer(t_window window)
+void	Window_UpdateBuffer(t_window window)
 {
 	size_t			i;
 	size_t			j;
@@ -86,7 +86,7 @@ void	update_buffer(t_window window)
 	}
 }
 
-t_colored_char	**get_buf(t_window window)
+t_colored_char	**Window_GetBuf(t_window window)
 {
 	if (!window)
 		return (NULL);

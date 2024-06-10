@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-t_colored_char	new_colored_char(t_uchar c, t_color fg, t_color bg)
+t_colored_char	ColoredChar_Init(t_uchar c, t_color fg, t_color bg)
 {
 	t_colored_char	colored_char;
 
@@ -17,24 +17,24 @@ t_colored_char	new_colored_char(t_uchar c, t_color fg, t_color bg)
 	return (colored_char);
 }
 
-void	del_colored_char(t_colored_char colored_char)
+void	ColoredChar_Free(t_colored_char colored_char)
 {
 	if (!colored_char)
 		return ;
 	free(colored_char);
 }
 
-inline void	set_c(t_colored_char c, t_uchar new_c)
+inline void	ColoredChar_SetChar(t_colored_char c, t_uchar new_c)
 {
 	c->c = new_c;
 }
 
-inline void	set_bg(t_colored_char c, t_color bg)
+inline void	ColoredChar_SetBg(t_colored_char c, t_color bg)
 {
 	c->bg = bg;
 }
 
-inline void	set_fg(t_colored_char c, t_color fg)
+inline void	ColoredChar_SetFg(t_colored_char c, t_color fg)
 {
 	c->fg = fg;
 }

@@ -31,23 +31,25 @@ typedef struct s_window
 typedef struct s_window	*t_window;
 
 // colored char
-t_colored_char			new_colored_char(t_uchar c, t_color fg, t_color bg);
-void					del_colored_char(t_colored_char colored_char);
-void					set_bg(t_colored_char c, t_color bg);
-void					set_fg(t_colored_char c, t_color fg);
-void					set_c(t_colored_char c, t_uchar new_c);
+t_colored_char			ColoredChar_Init(t_uchar c, t_color fg, t_color bg);
+void					ColoredChar_Free(t_colored_char colored_char);
+void					ColoredChar_SetBg(t_colored_char c, t_color bg);
+void					ColoredChar_SetFg(t_colored_char c, t_color fg);
+void					ColoredChar_SetChar(t_colored_char c, t_uchar new_c);
 
 // window
-t_window				new_window(size_t w, size_t h);
-void					del_window(t_window window);
-void					update_buffer(t_window window);
-t_colored_char			**get_buf(t_window window);
+t_window				Window_Init(size_t w, size_t h);
+void					Window_Free(t_window window);
+void					Window_UpdateBuffer(t_window window);
+t_colored_char			**Window_GetBuf(t_window window);
 
 /* update */
 void					change_color(t_window window, t_color fg);
 void					change_bg(t_window window, t_color bg);
 void					fill_window(t_window window, char c, size_t y0);
 void					force_newlines(t_window window);
+
+/* utils */
 void					set_line(t_window window, char *line, size_t x0,
 							size_t y);
 void					set_word_fg(t_window window, t_color fg, size_t x0,
@@ -55,9 +57,9 @@ void					set_word_fg(t_window window, t_color fg, size_t x0,
 void					set_word_bg(t_window window, t_color bg, size_t x0,
 							size_t xf, size_t y0);
 
-/* render */
-bool					ask_render(t_window window);
-void					set_render(t_window window, bool value);
-void					render(t_window window, size_t y_limit);
+/* Window_Render */
+bool					Window_AskRender(t_window window);
+void					Window_SetRender(t_window window, bool value);
+void					Window_Render(t_window window, size_t y_limit);
 
 #endif

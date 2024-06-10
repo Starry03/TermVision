@@ -15,21 +15,21 @@
 #define SHOW_CURSOR() printf("\x1b[?25h")
 
 /**
- * @brief tries to set the render flag to true
- * @return true if the render flag was set to true, false otherwise
+ * @brief tries to set the Window_Render flag to true
+ * @return true if the Window_Render flag was set to true, false otherwise
  */
-bool	ask_render(t_window window)
+bool	Window_AskRender(t_window window)
 {
 	if (!window)
 		return (false);
-	set_render(window, true);
+	Window_SetRender(window, true);
 	return (window->needs_render);
 }
 
 /**
- * @brief set the render flag to a value
+ * @brief set the Window_Render flag to a value
  */
-void	set_render(t_window window, bool value)
+void	Window_SetRender(t_window window, bool value)
 {
 	if (!window)
 		return ;
@@ -44,7 +44,7 @@ static inline bool	c_changed(t_colored_char a, t_colored_char b)
 /**
  * @brief renders the buffer to the window
  */
-void	render(t_window window, size_t y_limit)
+void	Window_Render(t_window window, size_t y_limit)
 {
 	t_colored_char	**buf;
 	t_colored_char	**prev_buf;
@@ -80,6 +80,6 @@ void	render(t_window window, size_t y_limit)
 	}
 	SHOW_CURSOR();
 	fflush(stdout);
-	update_buffer(window);
-	set_render(window, false);
+	Window_UpdateBuffer(window);
+	Window_SetRender(window, false);
 }
