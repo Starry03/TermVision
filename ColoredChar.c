@@ -26,15 +26,21 @@ void	ColoredChar_Free(t_colored_char colored_char)
 
 inline void	ColoredChar_SetChar(t_colored_char c, t_uchar new_c)
 {
+	if (!c)
+		return ;
 	c->c = new_c;
 }
 
 inline void	ColoredChar_SetBg(t_colored_char c, t_color bg)
 {
+	if (!c)
+		return ;
 	c->bg = bg;
 }
 
 inline void	ColoredChar_SetFg(t_colored_char c, t_color fg)
 {
+	if (!c)
+		return ;
 	c->fg = fg;
 }
