@@ -21,7 +21,10 @@ static void	add_color(t_color color, uint16_t color_value)
 	strcat(color, buf);
 	free(buf);
 }
-
+/**
+ * @brief Get the ansi color object from a rgb value
+ * @param is_fg true is foreground, false is background (ansi changes)
+ */
 t_color	get_ansi_color(uint16_t red, uint16_t green, uint16_t blue, bool is_fg)
 {
 	t_color	color;

@@ -18,6 +18,12 @@ static t_colored_char	**allocate_buf(size_t w, size_t h)
 	return (buf);
 }
 
+/**
+ * @brief Initializes a window
+ * @param w The width of the window buffer
+ * @param h The height of the window buffer
+ * @return The window
+ */
 t_window	Window_Init(size_t w, size_t h)
 {
 	t_window	window;
@@ -62,6 +68,10 @@ void	Window_Free(t_window window)
 	free(window);
 }
 
+/**
+ * @brief Updates the previous buffer with the current buffer
+ * @note Don't use this function unless you know what you're doing
+ */
 void	Window_UpdateBuffer(t_window window)
 {
 	size_t			i;
@@ -86,6 +96,9 @@ void	Window_UpdateBuffer(t_window window)
 	}
 }
 
+/**
+ * @return The buffer of the window
+ */
 t_colored_char	**Window_GetBuf(t_window window)
 {
 	if (!window)
