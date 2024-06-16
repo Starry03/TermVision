@@ -41,8 +41,6 @@ void	Window_Render(t_window window, size_t y_limit,
 {
 	t_colored_char	**buf;
 	t_colored_char	**prev_buf;
-	size_t			i;
-	size_t			j;
 	size_t			w;
 	size_t			h;
 
@@ -50,14 +48,13 @@ void	Window_Render(t_window window, size_t y_limit,
 		return ;
 	buf = window->buf;
 	prev_buf = window->prev_buf;
-	i = 0;
 	w = window->w;
 	h = (y_limit < window->h) ? y_limit : window->h;
 	force_newlines(window);
 	HIDE_CURSOR();
-	for (i = 0; i < h; i++)
+	for (size_t i = 0; i < h; i++)
 	{
-		for (j = 0; j < w; j++)
+		for (size_t j = 0; j < w; j++)
 		{
 			if (c_changed(buf[i][j], prev_buf[i][j]))
 			{
