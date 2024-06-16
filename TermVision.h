@@ -8,6 +8,14 @@
 # define WINDOW_WIDTH 96
 # define WINDOW_HEIGHT 16
 
+# define CLEAR "\e[3J\e[H\e[2J"
+# define CLEAR2 "\e[1;1H\e[2J"
+# define DISABLE_WRAPPING "\033[?7l"
+# define ENABLE_WRAPPING "\033[?7h"
+# define MOVE_CURSOR(x, y) printf("\x1b[%ld;%ldH", (y), (x))
+# define HIDE_CURSOR() printf("\x1b[?25l")
+# define SHOW_CURSOR() printf("\x1b[?25h")
+
 typedef unsigned char	t_uchar;
 
 typedef struct s_colored_char
@@ -60,6 +68,7 @@ void					set_word_bg(t_window window, t_color bg, size_t x0,
 /* Window_Render */
 bool					Window_AskRender(t_window window);
 void					Window_SetRender(t_window window, bool value);
-void					Window_Render(t_window window, size_t y_limit);
+void					Window_Render(t_window window, size_t y_limit,
+							bool leave_cursor_invisible);
 
 #endif

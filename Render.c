@@ -6,14 +6,6 @@
 #include <string.h>
 #include <unistd.h>
 
-#define CLEAR "\e[3J\e[H\e[2J"
-#define CLEAR2 "\e[1;1H\e[2J"
-#define DISABLE_WRAPPING "\033[?7l"
-#define ENABLE_WRAPPING "\033[?7h"
-#define MOVE_CURSOR(x, y) printf("\x1b[%ld;%ldH", (y), (x))
-#define HIDE_CURSOR() printf("\x1b[?25l")
-#define SHOW_CURSOR() printf("\x1b[?25h")
-
 /**
  * @brief tries to set the Window_Render flag to true
  * @return true if the Window_Render flag was set to true, false otherwise
@@ -44,7 +36,8 @@ static inline bool	c_changed(t_colored_char a, t_colored_char b)
 /**
  * @brief renders the buffer to the window
  */
-void	Window_Render(t_window window, size_t y_limit)
+void	Window_Render(t_window window, size_t y_limit,
+		bool leave_cursor_invisible)
 {
 	t_colored_char	**buf;
 	t_colored_char	**prev_buf;
@@ -78,7 +71,8 @@ void	Window_Render(t_window window, size_t y_limit)
 			}
 		}
 	}
-	SHOW_CURSOR();
+	if (!leave_cursor_invisible)
+		SHOW_CURSOR();
 	fflush(stdout);
 	Window_UpdateBuffer(window);
 	Window_SetRender(window, false);
