@@ -24,23 +24,53 @@ void	ColoredChar_Free(t_colored_char colored_char)
 	free(colored_char);
 }
 
-inline void	ColoredChar_SetChar(t_colored_char c, t_uchar new_c)
+void	ColoredChar_Reset(t_colored_char c)
+{
+	if (!c)
+		return ;
+	c->c = 0;
+	c->fg = 0;
+	c->bg = 0;
+}
+
+void	ColoredChar_SetChar(t_colored_char c, t_uchar new_c)
 {
 	if (!c)
 		return ;
 	c->c = new_c;
 }
 
-inline void	ColoredChar_SetBg(t_colored_char c, t_color bg)
+void	ColoredChar_SetBg(t_colored_char c, t_color bg)
 {
 	if (!c)
 		return ;
 	c->bg = bg;
 }
 
-inline void	ColoredChar_SetFg(t_colored_char c, t_color fg)
+void	ColoredChar_SetFg(t_colored_char c, t_color fg)
 {
 	if (!c)
 		return ;
 	c->fg = fg;
+}
+
+t_uchar	ColoredChar_GetChar(t_colored_char c)
+{
+	if (!c)
+		return (0);
+	return (c->c);
+}
+
+t_color	ColoredChar_GetBg(t_colored_char c)
+{
+	if (!c)
+		return (0);
+	return (c->bg);
+}
+
+t_color	ColoredChar_GetFg(t_colored_char c)
+{
+	if (!c)
+		return (0);
+	return (c->fg);
 }

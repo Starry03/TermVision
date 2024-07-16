@@ -44,6 +44,10 @@ void					ColoredChar_Free(t_colored_char colored_char);
 void					ColoredChar_SetBg(t_colored_char c, t_color bg);
 void					ColoredChar_SetFg(t_colored_char c, t_color fg);
 void					ColoredChar_SetChar(t_colored_char c, t_uchar new_c);
+t_uchar					ColoredChar_GetChar(t_colored_char c);
+t_color					ColoredChar_GetBg(t_colored_char c);
+t_color					ColoredChar_GetFg(t_colored_char c);
+void					ColoredChar_Reset(t_colored_char c);
 
 // window
 t_window				Window_Init(size_t w, size_t h);
