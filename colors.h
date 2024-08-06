@@ -46,6 +46,7 @@ typedef char	*t_color;
 # define BG_OLIVE "\033[48;2;128;128;0m" // Olive
 # define BG_TEAL "\033[48;2;0;128;128m" // Teal
 # define BG_NAVY "\033[48;2;0;0;128m" // Navy
+# define BG_DARK_BLUE "\033[48;2;40;44;52m" // Dark blue
 
 // text styles
 
