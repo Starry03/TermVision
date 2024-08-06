@@ -20,6 +20,13 @@ typedef char	*t_color;
 # define MAGENTA "\033[38;2;199;21;133m" // Medium Violet Red
 # define CYAN "\033[38;2;0;206;209m" // Dark Turquoise
 # define WHITE "\033[38;2;245;245;245m" // White Smoke
+# define ORANGE "\033[38;2;255;165;0m" // Orange
+# define PINK "\033[38;2;255;192;203m" // Pink
+# define PURPLE "\033[38;2;128;0;128m" // Purple
+# define BROWN "\033[38;2;165;42;42m" // Brown
+# define OLIVE "\033[38;2;128;128;0m" // Olive
+# define TEAL "\033[38;2;0;128;128m" // Teal
+# define NAVY "\033[38;2;0;0;128m" // Navy
 
 // background colors
 
@@ -31,6 +38,13 @@ typedef char	*t_color;
 # define BG_MAGENTA "\033[48;2;199;21;133m" // Medium Violet Red
 # define BG_CYAN "\033[48;2;0;206;209m" // Dark Turquoise
 # define BG_WHITE "\033[48;2;245;245;245m" // White Smoke
+# define BG_ORANGE "\033[48;2;255;165;0m" // Orange
+# define BG_PINK "\033[48;2;255;192;203m" // Pink
+# define BG_PURPLE "\033[48;2;128;0;128m" // Purple
+# define BG_BROWN "\033[48;2;165;42;42m" // Brown
+# define BG_OLIVE "\033[48;2;128;128;0m" // Olive
+# define BG_TEAL "\033[48;2;0;128;128m" // Teal
+# define BG_NAVY "\033[48;2;0;0;128m" // Navy
 
 // text styles
 
