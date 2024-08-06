@@ -6,75 +6,71 @@
 #include <string.h>
 #include <unistd.h>
 
-#define CLEAR "\e[3J\e[H\e[2J"
-#define DISABLE_WRAPPING "\033[?7l"
-#define ENABLE_WRAPPING "\033[?7h"
-
 /**
- * @brief tries to set the render flag to true
- * @return true if the render flag was set to true, false otherwise
-*/
-bool	ask_render(t_window window)
+ * @brief tries to set the Window_Render flag to true
+ * @return true if the Window_Render flag was set to true, false otherwise
+ */
+bool	Window_AskRender(t_window window)
 {
 	if (!window)
 		return (false);
-	set_render(window, true);
+	Window_SetRender(window, true);
 	return (window->needs_render);
 }
 
 /**
- * @brief set the render flag to a value
-*/
-void	set_render(t_window window, bool value)
+ * @brief set the Window_Render flag to a value
+ */
+void	Window_SetRender(t_window window, bool value)
 {
 	if (!window)
 		return ;
 	window->needs_render = value;
 }
 
+static inline bool	c_changed(t_colored_char a, t_colored_char b)
+{
+	return (a->c != b->c || a->fg != b->fg || a->bg != b->bg);
+}
+
 /**
  * @brief renders the buffer to the window
-*/
-void	render(t_window window)
+ */
+void	Window_Render(t_window window, size_t y_limit,
+		bool leave_cursor_invisible)
 {
 	t_colored_char	**buf;
-	t_colored_char	c_char;
-	size_t			i;
-	size_t			j;
+	t_colored_char	**prev_buf;
 	size_t			w;
 	size_t			h;
-	size_t			len_buf;
-	char			*output;
-	size_t			output_len;
 
 	if (!window || !window->needs_render || !window->buf)
 		return ;
 	buf = window->buf;
-	if (!buf)
-		return ;
-	i = 0;
+	prev_buf = window->prev_buf;
 	w = window->w;
-	h = window->h;
-	output = calloc(8, sizeof(char));
-	output_len = 0;
-	while (i < h)
+	h = (y_limit < window->h) ? y_limit : window->h;
+	force_newlines(window);
+	HIDE_CURSOR();
+	for (size_t i = 0; i < h; i++)
 	{
-		j = 0;
-		while (j < w)
+		for (size_t j = 0; j < w; j++)
 		{
-			c_char = buf[i][j];
-			output_len += snprintf(NULL, 0, "%s%s%c%s", c_char->fg, c_char->bg,
-					c_char->c, RESET);
-			output = realloc(output, output_len + 1);
-			len_buf = strlen(output);
-			snprintf(output + len_buf, output_len + 1 - len_buf, "%s%s%c%s",
-				c_char->fg, c_char->bg, c_char->c, RESET);
-			j++;
+			if (c_changed(buf[i][j], prev_buf[i][j]))
+			{
+				MOVE_CURSOR(j, i);
+				if (!buf[i][j]->c || (buf[i][j]->c == '\n' && w - j != 1))
+					printf("%s%s%c%s", buf[i][j]->fg, buf[i][j]->bg, ' ',
+						RESET);
+				else
+					printf("%s%s%c%s", buf[i][j]->fg, buf[i][j]->bg,
+						buf[i][j]->c, RESET);
+			}
 		}
-		i++;
 	}
-	write(STDOUT_FILENO, CLEAR, strlen(CLEAR));
-	write(STDOUT_FILENO, output, output_len);
-	free(output);
-	set_render(window, false);
+	if (!leave_cursor_invisible)
+		SHOW_CURSOR();
+	fflush(stdout);
+	Window_UpdateBuffer(window);
+	Window_SetRender(window, false);
 }

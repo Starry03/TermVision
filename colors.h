@@ -38,6 +38,7 @@ typedef char	*t_color;
 # define BG_MAGENTA "\033[48;2;199;21;133m" // Medium Violet Red
 # define BG_CYAN "\033[48;2;0;206;209m" // Dark Turquoise
 # define BG_WHITE "\033[48;2;245;245;245m" // White Smoke
+# define BG_DARK_BLUE "\033[48;2;40;44;52m" // Dark blue
 # define BG_ORANGE "\033[48;2;255;165;0m" // Orange
 # define BG_PINK "\033[48;2;255;192;203m" // Pink
 # define BG_PURPLE "\033[48;2;128;0;128m" // Purple
