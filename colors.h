@@ -9,6 +9,7 @@
 typedef char	*t_color;
 
 # define RESET "\033[0m"
+# define STD_COLOR "\033[0m"
 
 // foreground colors
 
